@@ -50,16 +50,21 @@ class SocialTextEditingController extends TextEditingController{
   }
 
   void replaceRange(String newValue, TextRange range){
+    print("@@0 $newValue $range");
     // print("newValue: $newValue, range: $range: ${range.textInside(text)}");
     var newText = text.replaceRange(range.start, range.end, newValue);
+    print("@@1 $newText");
     var newRange = TextRange(start: range.start, end: range.start + newValue.length);
+    print("@@2 $newRange");
     // print("Updated Range Content: [${newRange.textAfter(newText)}], text length: ${newText.length}, ${newRange.end}");
-//     bool isAtTheEndOfText = (newRange.textAfter(newText) == " " && newRange.end == newText.length - 1);
-//     if(isAtTheEndOfText){
-//       newText += " ";
-//     }
-    TextSelection newTextSelection = TextSelection(baseOffset: newRange.end, extentOffset: newRange.end);
+    bool isAtTheEndOfText = (newRange.textAfter(newText) == " " && newRange.end == newText.length - 1);
+    if(isAtTheEndOfText){
+      newText += " ";
+    }
+    TextSelection newTextSelection = TextSelection(baseOffset: newRange.end+1, extentOffset: newRange.end+1);
+    print("@@3 $newTextSelection");
     value = value.copyWith(text: newText, selection: newTextSelection);
+    print("@@4 $value");
   }
 
   void _processNewValue(TextEditingValue newValue){
