@@ -58,7 +58,7 @@ class SocialTextEditingController extends TextEditingController{
 //     if(isAtTheEndOfText){
 //       newText += " ";
 //     }
-    TextSelection newTextSelection = TextSelection(baseOffset: newRange.end + 1, extentOffset: newRange.end + 1);
+    TextSelection newTextSelection = TextSelection(baseOffset: newRange.end, extentOffset: newRange.end);
     value = value.copyWith(text: newText, selection: newTextSelection);
   }
 
